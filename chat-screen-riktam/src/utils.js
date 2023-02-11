@@ -22,3 +22,13 @@ export const getUserInitials = () => {
     background: "#4BBCF4",
   };
 };
+
+export const getSxForUserInfo = (backgroundColor, borderColor) => {
+  return {
+    borderRadius: 4,
+    margin: 1.5,
+    padding: 1,
+    backgroundColor: `${backgroundColor}`,
+    border: `1px solid ${borderColor}`,
+  };
+};
