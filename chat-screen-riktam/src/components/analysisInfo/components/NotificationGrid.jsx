@@ -4,7 +4,7 @@ import { notificationSetting, messageWithPurpose } from "../../../utils";
 
 const NotificationGrid = () => {
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} sx={{ marginTop: 0.5 }}>
       {notificationSetting.map((setting, index) => {
         return (
           <Grid key={index} item sm={6}>
