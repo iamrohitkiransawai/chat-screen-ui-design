@@ -1,9 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
 import { getSxForUserInfo } from "../../utils";
-import NotificationRect from "./components/NotificationRect";
+import MiddleRightSection from "./components/MiddleRightSection";
 import UserArchiveScreen from "./components/UserArchiveScreen";
-import WatchLaterTwoToneIcon from "@mui/icons-material/WatchLaterTwoTone";
 
 const AnalysisInfo = () => {
   return (
@@ -11,7 +10,7 @@ const AnalysisInfo = () => {
       <Box sx={getSxForUserInfo("#BBDED6", "#8AC6D1")}>
         <UserArchiveScreen />
       </Box>
-      <NotificationRect Icon={WatchLaterTwoToneIcon} />
+      <MiddleRightSection />
     </Grid>
   );
 };

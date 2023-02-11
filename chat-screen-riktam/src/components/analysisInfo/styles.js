@@ -39,18 +39,27 @@ export const NotificationRoot = styled.div`
   align-items: center;
   padding: 10px;
   border-radius: 10px;
-  background-color: #e0e0e0;
+  background-color: ${(props) => props.bColor};
 `;
 
 export const NotificationIcon = styled.div`
   color: #3f51b5;
   font-size: 34px;
-  margin-right: 10px;
-  flex-shrink: 0;
 `;
 
 export const NotificationInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 5px;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: ${(props) => props.bColor};
+  margin-right: 5px;
 `;
