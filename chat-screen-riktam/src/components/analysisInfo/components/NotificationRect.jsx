@@ -1,23 +1,33 @@
 import { Typography } from "@mui/material";
 import {
+  IconContainer,
   NotificationIcon,
   NotificationInfo,
   NotificationRoot,
 } from "../styles";
 
-const NotificationRect = ({ Icon }) => (
-  <NotificationRoot>
-    <NotificationIcon>
-      <Icon />
-    </NotificationIcon>
+const NotificationRect = ({
+  Icon,
+  message,
+  purpose,
+  fColor,
+  bColor,
+  bRgba,
+}) => (
+  <NotificationRoot bColor={bColor}>
+    <IconContainer bColor={bRgba}>
+      <NotificationIcon>
+        <Icon />
+      </NotificationIcon>
+    </IconContainer>
     <NotificationInfo>
       <Typography
         variant="subtitle1"
-        style={{ color: "#3f51b5", fontWeight: "bold" }}
+        style={{ color: fColor, fontWeight: "bold" }}
       >
-        13H
+        {message}
       </Typography>
-      <Typography variant="body2">Time</Typography>
+      <Typography variant="body2">{purpose}</Typography>
     </NotificationInfo>
   </NotificationRoot>
 );
