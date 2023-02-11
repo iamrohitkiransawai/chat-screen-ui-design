@@ -1,7 +1,5 @@
 import { Avatar, Box, Stack } from "@mui/material";
 import React from "react";
-import { UserName } from "../styles";
-import { faker } from "@faker-js/faker";
 
 export const AvatarWithName = ({ name, avatar }) => {
   return (
@@ -10,7 +8,7 @@ export const AvatarWithName = ({ name, avatar }) => {
         borderRadius: 2,
         margin: 1,
         padding: 1,
-        backgroundColor: "#e1f5fe",
+        backgroundColor: "#00B8A9",
       }}
     >
       <Stack direction={"row"}>

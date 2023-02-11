@@ -1,17 +1,20 @@
 import { faker } from "@faker-js/faker";
-import { Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
-import { AvatarWithName } from "./components/avatarWithName";
+import { getListOfUsers } from "../../utils";
+import CollapsedList from "./components/CollapsedList";
+import UserInfoComp from "./components/UserInfoComp";
 
 const UserInfo = () => {
   return (
-    <Grid item xs={12} sm={3} md={3} lg={3}>
-      <Paper>
-        <AvatarWithName
-          name={faker.name.fullName()}
-          avatar={faker.image.avatar()}
-        />
-      </Paper>
+    <Grid item xs={12} sm={6} md={6} lg={3}>
+      <UserInfoComp
+        name={faker.name.fullName()}
+        avatar={faker.image.avatar()}
+        designation={faker.name.jobTitle()}
+      />
+
+      <CollapsedList users={getListOfUsers()} />
     </Grid>
   );
 };
