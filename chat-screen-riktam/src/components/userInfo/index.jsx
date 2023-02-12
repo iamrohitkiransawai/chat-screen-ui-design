@@ -14,7 +14,18 @@ const UserInfo = () => {
         designation={faker.name.jobTitle()}
       />
 
-      <CollapsedList users={getListOfUsers()} />
+      <CollapsedList
+        users={getListOfUsers()}
+        listName={"Active Conversations"}
+        totalUnreadCount={5}
+        defaultCollapseState={true}
+      />
+      <CollapsedList
+        users={getListOfUsers()}
+        listName={"Archive Conversations"}
+        totalUnreadCount={10}
+        defaultCollapseState={false}
+      />
     </Grid>
   );
 };
