@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,8 +9,13 @@ import { Typography } from "@mui/material";
 import { Dot } from "../styles";
 import UserListItem from "./UserListItem";
 
-export default function CollapsedList({ users }) {
-  const [open, setOpen] = React.useState(true);
+export default function CollapsedList({
+  users,
+  listName,
+  totalUnreadCount,
+  defaultCollapseState = true,
+}) {
+  const [open, setOpen] = useState(defaultCollapseState);
 
   const handleClick = () => {
     setOpen(!open);
@@ -23,10 +28,10 @@ export default function CollapsedList({ users }) {
           sx={{ fontWeight: "bold" }}
           primary={
             <Typography variant="body1">
-              {"Active Conversations"}
+              {listName}
               &nbsp;
               <Dot dotColor={"#DCD7C9"} textColor={"#000"}>
-                {"5"}
+                {totalUnreadCount}
               </Dot>
             </Typography>
           }
