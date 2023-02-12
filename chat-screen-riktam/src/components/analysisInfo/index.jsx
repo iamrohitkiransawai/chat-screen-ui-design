@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 import { getSxForUserInfo } from "../../utils";
 import MiddleRightSection from "./components/MiddleRightSection";
+import CopyLinkComp from "./components/onboard-client/CopyLinkComp";
 import UserArchiveScreen from "./components/UserArchiveScreen";
 
 const AnalysisInfo = () => {
@@ -11,6 +12,7 @@ const AnalysisInfo = () => {
         <UserArchiveScreen />
       </Box>
       <MiddleRightSection />
+      <CopyLinkComp />
     </Grid>
   );
 };

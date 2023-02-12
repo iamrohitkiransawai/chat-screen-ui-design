@@ -117,3 +117,9 @@ export const DayLabel = styled.div`
   text-align: center;
   margin-top: 10px;
 `;
+
+export const CopyLinkCompStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
