@@ -1,78 +1,22 @@
-import {
-  Avatar,
-  Grid,
-  List,
-  ListItemAvatar,
-  ListItemText,
-  Paper,
-} from "@mui/material";
-import React, { useState } from "react";
-import {
-  ChatContainer,
-  MessageItem,
-  MessageList,
-  SendButton,
-  MessageInput,
-  MessageInputContainer,
-} from "./styles";
-import SendIcon from "@mui/icons-material/Send";
-import { useDispatch, useSelector } from "react-redux";
-import { messageSelector } from "../../slices";
+import { Grid, Box } from "@mui/material";
+import ChatWindow from "./components/ChatWindow";
+import useWindowDimensions from "./components/useWindowDimensions";
 
-const ChatInfo = () => {
-  const [message, setMessage] = useState("");
-  const messages = useSelector(messageSelector);
-  const dispatch = useDispatch();
+const CopyLinkComp = () => (
+  <Grid item xs={12} sm={6} md={6} lg={6}>
+    <Box
+      sx={{
+        borderRadius: 4,
+        margin: 1.5,
+        padding: 1,
+        height: useWindowDimensions().height - 20,
+        backgroundColor: `#BBDED6`,
+        border: `1px solid #8AC6D1`,
+      }}
+    >
+      <ChatWindow />
+    </Box>
+  </Grid>
+);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(
-      messagesSlice.actions.addMessage({
-        text: message,
-        isSentByUser: true,
-      })
-    );
-    setMessage("");
-  };
-  return (
-    <Grid item xs={12} sm={6} md={6} lg={6}>
-      <ChatContainer>
-        <MessageList>
-          <List>
-            {messages &&
-              messages.map((message, index) => (
-                <MessageItem
-                  key={index}
-                  align={message.isSentByUser ? "right" : "left"}
-                >
-                  {!message.isSentByUser && (
-                    <ListItemAvatar>
-                      <Avatar>O</Avatar>
-                    </ListItemAvatar>
-                  )}
-                  <ListItemText primary={message.text} />
-                  {message.isSentByUser && (
-                    <ListItemAvatar>
-                      <Avatar>U</Avatar>
-                    </ListItemAvatar>
-                  )}
-                </MessageItem>
-              ))}
-          </List>
-        </MessageList>
-      </ChatContainer>
-      <MessageInputContainer>
-        <MessageInput
-          label="Type a message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <SendButton type="submit" onClick={handleSubmit}>
-          <SendIcon />
-        </SendButton>
-      </MessageInputContainer>
-    </Grid>
-  );
-};
-
-export default ChatInfo;
+export default CopyLinkComp;
