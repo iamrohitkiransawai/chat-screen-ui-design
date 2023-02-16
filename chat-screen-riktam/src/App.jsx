@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, CssBaseline, Grid } from "@mui/material";
 import "./App.css";
 import AnalysisInfo from "./components/analysisInfo";
 import ChatInfo from "./components/chatInfo";
 import UserInfo from "./components/userInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { faker } from "@faker-js/faker";
+import { addSenderToStore, senderDataSelector } from "./slices/senderSlice";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  const senderData = useSelector(senderDataSelector);
+
+  const addUserData = () => {
+    let senderName = "";
+    let designation = "";
+    let activeStatus = "";
+    let avatar = "";
+    try {
+      senderName = faker.name.fullName();
+      designation = faker.name.jobTitle();
+      activeStatus = false;
+      avatar = faker.image.avatar();
+
+      dispatch(
+        addSenderToStore({ senderName, designation, activeStatus, avatar })
+      );
+    } catch (error) {
+      console.log(":: ~ file: App.jsx:25 ~ useEffect ~ error", error);
+      console.table({ senderName, designation, activeStatus, avatar });
+    }
+  };
+
+  useEffect(() => {
+    addUserData();
+  }, []);
+
   return (
     <Container maxWidth="xl">
       <CssBaseline />
@@ -16,6 +46,6 @@ function App() {
       </Grid>
     </Container>
   );
-}
+};
 
 export default App;

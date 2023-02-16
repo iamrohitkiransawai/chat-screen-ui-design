@@ -17,7 +17,7 @@ const UserInfoComp = ({ name, avatar, designation, active }) => {
           <SettingsIcon />
         </UserNameInComp>
         <Designation fontSize={"14px"}>{designation}</Designation>
-        <AntDesignSwitch activeStatus={true} />
+        <AntDesignSwitch activeStatus={active} />
       </UserInfoBox>
     </Box>
   );
