@@ -52,13 +52,13 @@ export const StyledList = styled(List)`
 export const StyledListItem = styled(ListItem)`
   display: flex;
   justify-content: ${(props) =>
-    props.className === "receiverMessage" ? "flex-start" : "flex-end"};
+    props.className === "receiverMessage" ? "flex-end" : "flex-start"};
   align-items: center;
   margin-bottom: 10px;
   padding-left: ${(props) =>
-    props.className === "receiverMessage" ? "16px" : "0"};
+    props.className === "receiverMessage" ? "0" : "16px"};
   padding-right: ${(props) =>
-    props.className === "senderMessage" ? "16px" : "0"};
+    props.className === "senderMessage" ? "0" : "16px"};
 `;
 
 export const StyledListItemText = styled(ListItemText)`
@@ -77,5 +77,17 @@ export const StyledAvatar = styled(Avatar)`
   margin-left: ${(props) =>
     props.className === "senderMessage" ? "10px" : "0"};
   margin-right: ${(props) =>
-    props.className === "receiverMessage" ? "10px" : "0"};
+    props.className === "receiverMessage" ? "0px" : "0"};
+`;
+
+export const StyledDot = styled.div`
+  position: absolute;
+  bottom: 0;
+  ${(props) => (props.position === "left" ? "right: 0" : "right: 0")};
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: ${(props) => (props.active ? "#4caf50" : "#ccc")};
+  margin-right: ${(props) => (props.position === "left" ? "20px" : "10px")};
+  border: ${(props) => (props.active ? "1px solid #4caf50" : "1px solid #fff")};
 `;
