@@ -13,7 +13,7 @@ import CustomTextField from "./CustomTextField";
 import useWindowDimensions from "./useWindowDimensions";
 import { SENDER, RECEIVER } from "../../../constants";
 
-const ChatWindow = () => {
+const ChatWindow = ({ senderActiveStatus }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const ChatWindow = () => {
                 <div style={{ position: "relative" }}>
                   <ListItemAvatar>
                     <StyledAvatar className={"senderMessage"}>S</StyledAvatar>
-                    <StyledDot position="right" active={false} />
+                    <StyledDot position="right" active={senderActiveStatus} />
                   </ListItemAvatar>
                 </div>
               )}

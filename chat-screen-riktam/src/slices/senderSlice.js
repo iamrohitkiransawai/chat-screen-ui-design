@@ -43,3 +43,7 @@ export default senderSlice.reducer;
 export const addSenderToStore = (data) => async (dispatch) => {
   dispatch(addSender(data));
 };
+
+export const makeChangeInSenderStatus = (status) => async (dispatch) => {
+  dispatch(changeSenderActiveStatus(status));
+};

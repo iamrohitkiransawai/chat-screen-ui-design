@@ -1,21 +1,31 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
-import { senderDataSelector } from "../../slices/senderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  makeChangeInSenderStatus,
+  senderDataSelector,
+} from "../../slices/senderSlice";
 import { getListOfUsers } from "../../utils";
 import CollapsedList from "./components/CollapsedList";
 import UserInfoComp from "./components/UserInfoComp";
 
 const UserInfo = () => {
-  const senderData = useSelector(senderDataSelector);
+  const dispatch = useDispatch();
+  const { senderName, avatar, designation, activeStatus } =
+    useSelector(senderDataSelector);
+
+  const changeSenderActiveStatus = () => {
+    dispatch(makeChangeInSenderStatus(!activeStatus));
+  };
 
   return (
     <Grid item xs={12} sm={6} md={6} lg={3}>
       <UserInfoComp
-        name={senderData.senderName}
-        avatar={senderData.avatar}
-        designation={senderData.designation}
-        active={senderData.activeStatus}
+        name={senderName}
+        avatar={avatar}
+        designation={designation}
+        active={activeStatus}
+        changeStatus={changeSenderActiveStatus}
       />
 
       <CollapsedList
