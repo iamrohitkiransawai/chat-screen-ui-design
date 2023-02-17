@@ -2,6 +2,7 @@ import { Avatar, List, ListItemAvatar, ListItemText } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import {
   StyledAvatar,
+  StyledDot,
   StyledList,
   StyledListItem,
   StyledListItemText,
@@ -10,8 +11,9 @@ import {
 } from "../styles";
 import CustomTextField from "./CustomTextField";
 import useWindowDimensions from "./useWindowDimensions";
+import { SENDER, RECEIVER } from "../../../constants";
 
-const ChatWindow = () => {
+const ChatWindow = ({ senderActiveStatus }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -21,32 +23,32 @@ const ChatWindow = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      type: "receiver",
+      type: RECEIVER,
       text: "Hello, How are you?",
     },
     {
       id: 2,
-      type: "sender",
+      type: SENDER,
       text: "Hello, How are you?",
     },
     {
       id: 3,
-      type: "receiver",
+      type: RECEIVER,
       text: "Hello, How are you?",
     },
     {
       id: 4,
-      type: "sender",
+      type: SENDER,
       text: "Hello, How are you?",
     },
     {
       id: 5,
-      type: "receiver",
+      type: RECEIVER,
       text: "Hello, How are you?",
     },
     {
       id: 6,
-      type: "sender",
+      type: SENDER,
       text: "Hello, How are you?",
     },
   ]);
@@ -58,7 +60,7 @@ const ChatWindow = () => {
       ...messages,
       {
         id: messages.length + 1,
-        type: "sender",
+        type: SENDER,
         text: newMessage,
       },
     ]);
@@ -79,30 +81,34 @@ const ChatWindow = () => {
             <StyledListItem
               key={message.id}
               className={`${
-                message.type === "receiver"
-                  ? "receiverMessage"
-                  : "senderMessage"
+                message.type === RECEIVER ? "receiverMessage" : "senderMessage"
               }`}
             >
-              {message.type === "receiver" && (
-                <ListItemAvatar>
-                  <StyledAvatar className={"receiverMessage"}>R</StyledAvatar>
-                </ListItemAvatar>
+              {message.type === RECEIVER && (
+                <div style={{ position: "relative" }}>
+                  <ListItemAvatar>
+                    <StyledAvatar className={"receiverMessage"}>R</StyledAvatar>
+                    <StyledDot position="left" active={true} />
+                  </ListItemAvatar>
+                </div>
               )}
 
               <StyledListItemText
                 primary={message.text}
                 className={`${
-                  message.type === "receiver"
+                  message.type === RECEIVER
                     ? "receiverMessageText"
                     : "senderMessageText"
                 }`}
               />
 
-              {message.type === "sender" && (
-                <ListItemAvatar>
-                  <StyledAvatar className={"senderMessage"}>S</StyledAvatar>
-                </ListItemAvatar>
+              {message.type === SENDER && (
+                <div style={{ position: "relative" }}>
+                  <ListItemAvatar>
+                    <StyledAvatar className={"senderMessage"}>S</StyledAvatar>
+                    <StyledDot position="right" active={senderActiveStatus} />
+                  </ListItemAvatar>
+                </div>
               )}
             </StyledListItem>
           ))}

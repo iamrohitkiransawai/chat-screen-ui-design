@@ -5,7 +5,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AntDesignSwitch from "./AntDesignSwitch";
 import { getSxForUserInfo } from "../../../utils";
 
-const UserInfoComp = ({ name, avatar, designation, active }) => {
+const UserInfoComp = ({ name, avatar, designation, active, changeStatus }) => {
   return (
     <Box sx={getSxForUserInfo("#BBDED6", "#8AC6D1")}>
       <UserInfoBox>
@@ -17,7 +17,7 @@ const UserInfoComp = ({ name, avatar, designation, active }) => {
           <SettingsIcon />
         </UserNameInComp>
         <Designation fontSize={"14px"}>{designation}</Designation>
-        <AntDesignSwitch activeStatus={true} />
+        <AntDesignSwitch activeStatus={active} changeStatus={changeStatus} />
       </UserInfoBox>
     </Box>
   );

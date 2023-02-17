@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   SwitchContainer,
   SwitchInput,
@@ -7,18 +7,13 @@ import {
   SwitchSliderChecked,
 } from "../styles";
 
-const AntDesignSwitch = ({ activeStatus }) => {
-  const [isChecked, setIsChecked] = useState(activeStatus);
-
+const AntDesignSwitch = ({ activeStatus, changeStatus }) => {
   return (
     <>
       <SwitchContainer>
-        <SwitchInput
-          type="checkbox"
-          onChange={() => setIsChecked(!isChecked)}
-        />
-        {isChecked ? <SwitchSliderChecked /> : <SwitchSlider />}
-        <SwitchName>{isChecked ? "Active" : "Inactive"}</SwitchName>
+        <SwitchInput type="checkbox" onChange={() => changeStatus()} />
+        {activeStatus ? <SwitchSliderChecked /> : <SwitchSlider />}
+        <SwitchName>{activeStatus ? "Active" : "Inactive"}</SwitchName>
       </SwitchContainer>
     </>
   );

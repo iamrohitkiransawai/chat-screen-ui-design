@@ -1,19 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
+import MessageReducer from "./messageSlice";
+import SenderReducer from "./senderSlice";
 
-const messageSlice = createSlice({
-  name: "messages",
-  initialState: [],
-  reducers: {
-    addMessage: (state, { payload }) => {
-      state.push(payload);
-    },
-  },
+const rootReducer = combineReducers({
+  messages: MessageReducer,
+  senderData: SenderReducer,
 });
 
-export const { addMessage } = messageSlice.actions;
-export const messageSelector = (state) => state.messages;
-export default messageSlice.reducer;
-
-export const addMessageToStore = () => async (dispatch, data) => {
-  dispatch(addMessage(data));
-};
+export default rootReducer;

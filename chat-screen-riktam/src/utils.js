@@ -3,6 +3,7 @@ import WatchLaterTwoToneIcon from "@mui/icons-material/WatchLaterTwoTone";
 import PeopleAltTwoToneIcon from "@mui/icons-material/PeopleAltTwoTone";
 import EventAvailableTwoToneIcon from "@mui/icons-material/EventAvailableTwoTone";
 import ThumbDownTwoToneIcon from "@mui/icons-material/ThumbDownTwoTone";
+import moment from "moment";
 
 export const getListOfUsers = () => {
   let users = [];
@@ -72,4 +73,31 @@ export const messageWithPurpose = {
   Atendeed: 188,
   Meetings: 119,
   Rejected: 41,
+};
+
+export const dateTimeReadInHumanizeWay = () => {
+  // With the help of moment
+  const savedTime = moment("2002-01-11T02:03:00");
+  const timeDiff = moment().diff(savedTime);
+
+  console.log(moment.duration(timeDiff).humanize());
+};
+
+export const dateTimeReadInHumanizeIntl = () => {
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+  const savedTime = new Date("2021-02-13T21:50:00");
+  const timeDiff = Date.now() - savedTime;
+  const diffInSeconds = Math.floor(timeDiff / 1000);
+
+  if (diffInSeconds < 60) {
+    console.log(rtf.format(-diffInSeconds, "second"));
+  } else if (diffInSeconds < 3600) {
+    console.log(rtf.format(-Math.floor(diffInSeconds / 60), "minute"));
+  } else if (diffInSeconds < 86400) {
+    console.log(rtf.format(-Math.floor(diffInSeconds / 3600), "hour"));
+  } else if (diffInSeconds < 2592000) {
+    console.log(rtf.format(-Math.floor(diffInSeconds / 86400), "day"));
+  } else {
+    console.log(rtf.format(-Math.floor(diffInSeconds / 2592000), "month"));
+  }
 };
