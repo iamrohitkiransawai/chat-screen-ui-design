@@ -6,13 +6,12 @@ import ChatInfo from "./components/chatInfo";
 import UserInfo from "./components/userInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { faker } from "@faker-js/faker";
-import { addSenderToStore, senderDataSelector } from "./slices/senderSlice";
+import { addSenderToStore } from "./slices/senderSlice";
 
 const App = () => {
   const dispatch = useDispatch();
-  const senderData = useSelector(senderDataSelector);
 
-  const addUserData = () => {
+  const addSenderData = () => {
     let senderName = "";
     let designation = "";
     let activeStatus = "";
@@ -33,7 +32,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    addUserData();
+    addSenderData();
   }, []);
 
   return (
