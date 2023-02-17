@@ -83,21 +83,20 @@ export const dateTimeReadInHumanizeWay = () => {
   console.log(moment.duration(timeDiff).humanize());
 };
 
-export const dateTimeReadInHumanizeIntl = () => {
+export const dateTimeReadInHumanizeIntl = (savedTime) => {
   const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-  const savedTime = new Date("2021-02-13T21:50:00");
   const timeDiff = Date.now() - savedTime;
   const diffInSeconds = Math.floor(timeDiff / 1000);
 
   if (diffInSeconds < 60) {
-    console.log(rtf.format(-diffInSeconds, "second"));
+    return rtf.format(-diffInSeconds, "second");
   } else if (diffInSeconds < 3600) {
-    console.log(rtf.format(-Math.floor(diffInSeconds / 60), "minute"));
+    return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
   } else if (diffInSeconds < 86400) {
-    console.log(rtf.format(-Math.floor(diffInSeconds / 3600), "hour"));
+    return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
   } else if (diffInSeconds < 2592000) {
-    console.log(rtf.format(-Math.floor(diffInSeconds / 86400), "day"));
+    return rtf.format(-Math.floor(diffInSeconds / 86400), "day");
   } else {
-    console.log(rtf.format(-Math.floor(diffInSeconds / 2592000), "month"));
+    return rtf.format(-Math.floor(diffInSeconds / 2592000), "month");
   }
 };

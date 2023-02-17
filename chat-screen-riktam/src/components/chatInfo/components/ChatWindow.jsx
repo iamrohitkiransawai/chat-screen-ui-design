@@ -12,6 +12,7 @@ import {
 import CustomTextField from "./CustomTextField";
 import useWindowDimensions from "./useWindowDimensions";
 import { SENDER, RECEIVER } from "../../../constants";
+import { dateTimeReadInHumanizeIntl } from "../../../utils";
 
 const ChatWindow = ({ senderActiveStatus }) => {
   const listRef = useRef(null);
@@ -25,31 +26,37 @@ const ChatWindow = ({ senderActiveStatus }) => {
       id: 1,
       type: RECEIVER,
       text: "Hello, How are you?",
+      time: Date.now() + 1000,
     },
     {
       id: 2,
       type: SENDER,
       text: "Hello, How are you?",
+      time: Date.now() + 2000,
     },
     {
       id: 3,
       type: RECEIVER,
       text: "Hello, How are you?",
+      time: Date.now() + 3000,
     },
     {
       id: 4,
       type: SENDER,
       text: "Hello, How are you?",
+      time: Date.now() + 4000,
     },
     {
       id: 5,
       type: RECEIVER,
       text: "Hello, How are you?",
+      time: Date.now() + 5000,
     },
     {
       id: 6,
       type: SENDER,
       text: "Hello, How are you?",
+      time: Date.now() + 6000,
     },
   ]);
   const [newMessage, setNewMessage] = useState("");
@@ -95,6 +102,7 @@ const ChatWindow = ({ senderActiveStatus }) => {
 
               <StyledListItemText
                 primary={message.text}
+                time={dateTimeReadInHumanizeIntl(message.time)}
                 className={`${
                   message.type === RECEIVER
                     ? "receiverMessageText"

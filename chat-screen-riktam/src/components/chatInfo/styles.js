@@ -71,6 +71,18 @@ export const StyledListItemText = styled(ListItemText)`
     props.className === "receiverMessageText" ? "#333" : "#fff"};
   border-radius: 5px;
   padding: 10px;
+
+  &::after {
+    content: "${(props) => props.time}";
+    position: absolute;
+    bottom: -10px;
+    right: ${(props) =>
+      props.className === "receiverMessageText" ? "auto" : "70px"};
+    left: ${(props) =>
+      props.className === "receiverMessageText" ? "70px" : "auto"};
+    font-size: 12px;
+    color: #999;
+  }
 `;
 
 export const StyledAvatar = styled(Avatar)`
