@@ -14,7 +14,12 @@ import useWindowDimensions from "./useWindowDimensions";
 import { SENDER, RECEIVER } from "../../../constants";
 import { dateTimeReadInHumanizeIntl } from "../../../utils";
 
-const ChatWindow = ({ senderActiveStatus }) => {
+const ChatWindow = ({
+  senderActiveStatus,
+  chats,
+  senderAvatar,
+  receiverAvatar,
+}) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -84,9 +89,9 @@ const ChatWindow = ({ senderActiveStatus }) => {
     <StyledMainDiv>
       <StyledPaper height={height - 40}>
         <StyledList ref={listRef}>
-          {messages.map((message) => (
+          {chats.map((message) => (
             <StyledListItem
-              key={message.id}
+              key={message.id + 1000}
               className={`${
                 message.type === RECEIVER ? "receiverMessage" : "senderMessage"
               }`}
@@ -94,14 +99,17 @@ const ChatWindow = ({ senderActiveStatus }) => {
               {message.type === RECEIVER && (
                 <div style={{ position: "relative" }}>
                   <ListItemAvatar>
-                    <StyledAvatar className={"receiverMessage"}>R</StyledAvatar>
+                    <StyledAvatar
+                      src={receiverAvatar}
+                      className={"receiverMessage"}
+                    />
                     <StyledDot position="left" active={true} />
                   </ListItemAvatar>
                 </div>
               )}
 
               <StyledListItemText
-                primary={message.text}
+                primary={message.message}
                 time={dateTimeReadInHumanizeIntl(message.time)}
                 className={`${
                   message.type === RECEIVER
@@ -113,7 +121,10 @@ const ChatWindow = ({ senderActiveStatus }) => {
               {message.type === SENDER && (
                 <div style={{ position: "relative" }}>
                   <ListItemAvatar>
-                    <StyledAvatar className={"senderMessage"}>S</StyledAvatar>
+                    <StyledAvatar
+                      src={senderAvatar}
+                      className={"senderMessage"}
+                    />
                     <StyledDot position="right" active={senderActiveStatus} />
                   </ListItemAvatar>
                 </div>

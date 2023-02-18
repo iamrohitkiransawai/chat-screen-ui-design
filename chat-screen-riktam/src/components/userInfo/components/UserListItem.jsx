@@ -13,7 +13,7 @@ import { setSelectedUser } from "../../../slices/usersSlice";
 const UserListItem = ({ user }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(setSelectedUser(user.id));
+    dispatch(setSelectedUser(user));
   };
 
   return (

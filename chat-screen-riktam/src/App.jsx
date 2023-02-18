@@ -9,10 +9,34 @@ import { faker } from "@faker-js/faker";
 import { addSenderToStore } from "./slices/senderSlice";
 import { addUserToStore } from "./slices/usersSlice";
 import { setSelectedUserState } from "./slices/usersSlice";
+import { addChatToStore } from "./slices/conversationSlice";
 
 const App = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  let senderNameState = "";
   const dispatch = useDispatch();
+
+  const addInitialChatToStore = (user) => {
+    let chat = {
+      id: 1000 + user.id,
+      fromId: user.id,
+      toId: 0,
+      message: `Hi, ${senderNameState}. How are you???`,
+      time: Date.now(),
+    };
+
+    dispatch(addChatToStore(chat));
+
+    chat = {
+      id: 2000 + user.id,
+      fromId: 0,
+      toId: user.id,
+      message: `I'm good ${user.name}`,
+      time: Date.now(),
+    };
+
+    dispatch(addChatToStore(chat));
+  };
 
   const addUsersData = () => {
     for (let i = 0; i < 5; i++) {
@@ -26,8 +50,8 @@ const App = () => {
         unreadMessageCount: 0,
       };
 
-      i === 0 && dispatch(setSelectedUserState(1));
-
+      i === 0 && dispatch(setSelectedUserState(user));
+      addInitialChatToStore(user);
       dispatch(addUserToStore(user));
     }
   };
@@ -42,6 +66,8 @@ const App = () => {
       designation = faker.name.jobTitle();
       activeStatus = false;
       avatar = faker.image.avatar();
+
+      senderNameState = senderName;
 
       dispatch(
         addSenderToStore({ senderName, designation, activeStatus, avatar })

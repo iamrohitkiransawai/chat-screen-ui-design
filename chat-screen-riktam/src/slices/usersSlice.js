@@ -23,7 +23,7 @@ const usersSlice = createSlice({
       state.users.push(payload);
     },
     setSelectedUser: (state, { payload }) => {
-      state.selectedUser = payload;
+      state.selectedUser = { ...payload };
     },
   },
 });
