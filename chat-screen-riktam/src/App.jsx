@@ -20,6 +20,7 @@ const App = () => {
         id: i + 1,
         name: faker.name.fullName(),
         avatar: faker.image.avatar(),
+        emailId: faker.internet.email(),
         isActive: true,
         isArchive: false,
         unreadMessageCount: 0,
