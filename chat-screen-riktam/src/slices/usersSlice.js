@@ -1,7 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  users: [],
+  selectedUser: null,
+  users: [
+    // {
+    //   id: null,
+    //   name: "",
+    //   avatar: "",
+    //   emailId: "",
+    //   isActive: true,
+    //   isArchive: false,
+    //   unreadMessageCount: 0,
+    // },
+  ],
 };
 
 const usersSlice = createSlice({
@@ -9,13 +20,15 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, { payload }) => {
-      console.log(payload);
       state.users.push(payload);
+    },
+    setSelectedUser: (state, { payload }) => {
+      state.selectedUser = payload;
     },
   },
 });
 
-export const { addUser } = usersSlice.actions;
+export const { addUser, setSelectedUser } = usersSlice.actions;
 
 export const usersDataSelector = (state) => state.usersData;
 
@@ -23,4 +36,8 @@ export default usersSlice.reducer;
 
 export const addUserToStore = (data) => async (dispatch) => {
   dispatch(addUser(data));
+};
+
+export const setSelectedUserState = (data) => async (dispatch) => {
+  dispatch(setSelectedUser(data));
 };

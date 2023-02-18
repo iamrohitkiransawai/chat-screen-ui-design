@@ -4,6 +4,7 @@ import PeopleAltTwoToneIcon from "@mui/icons-material/PeopleAltTwoTone";
 import EventAvailableTwoToneIcon from "@mui/icons-material/EventAvailableTwoTone";
 import ThumbDownTwoToneIcon from "@mui/icons-material/ThumbDownTwoTone";
 import moment from "moment";
+import { FIRST, SECOND } from "./constants";
 
 export const getListOfUsers = () => {
   let users = [];
@@ -99,4 +100,19 @@ export const dateTimeReadInHumanizeIntl = (savedTime) => {
   } else {
     return rtf.format(-Math.floor(diffInSeconds / 2592000), "month");
   }
+};
+
+export const getFirstSecondLetterOfName = (name, type) => {
+  const [firstName, lastName, ...rest] = name.split(" ");
+  let letter = "";
+  switch (type) {
+    case FIRST:
+      letter = firstName[0];
+      break;
+    case SECOND:
+      letter = lastName[0];
+      break;
+  }
+
+  return letter;
 };

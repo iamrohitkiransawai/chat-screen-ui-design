@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { faker } from "@faker-js/faker";
 import { addSenderToStore } from "./slices/senderSlice";
 import { addUserToStore } from "./slices/usersSlice";
+import { setSelectedUserState } from "./slices/usersSlice";
 
 const App = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -24,6 +25,8 @@ const App = () => {
         isArchive: false,
         unreadMessageCount: 0,
       };
+
+      i === 0 && dispatch(setSelectedUserState(1));
 
       dispatch(addUserToStore(user));
     }
