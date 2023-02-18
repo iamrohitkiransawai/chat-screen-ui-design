@@ -31,7 +31,7 @@ export default function CollapsedList({
               {listName}
               &nbsp;
               <Dot dotColor={"#DCD7C9"} textColor={"#000"}>
-                {totalUnreadCount}
+                {users.filter((user) => user.isActive === true).length}
               </Dot>
             </Typography>
           }

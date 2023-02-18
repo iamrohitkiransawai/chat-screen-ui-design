@@ -5,6 +5,7 @@ import {
   makeChangeInSenderStatus,
   senderDataSelector,
 } from "../../slices/senderSlice";
+import { usersDataSelector } from "../../slices/usersSlice";
 import { getListOfUsers } from "../../utils";
 import CollapsedList from "./components/CollapsedList";
 import UserInfoComp from "./components/UserInfoComp";
@@ -13,6 +14,8 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const { senderName, avatar, designation, activeStatus } =
     useSelector(senderDataSelector);
+
+  const { users } = useSelector(usersDataSelector);
 
   const changeSenderActiveStatus = () => {
     dispatch(makeChangeInSenderStatus(!activeStatus));
@@ -29,7 +32,7 @@ const UserInfo = () => {
       />
 
       <CollapsedList
-        users={getListOfUsers()}
+        users={users}
         listName={"Active Conversations"}
         totalUnreadCount={5}
         defaultCollapseState={true}
