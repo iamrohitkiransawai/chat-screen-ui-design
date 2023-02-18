@@ -10,7 +10,7 @@ import { usersDataSelector } from "../../slices/usersSlice";
 const AnalysisInfo = ({ userId }) => {
   const { users, selectedUser } = useSelector(usersDataSelector);
   const selectedUserInfo =
-    users.length > 0 && users.find((user) => user.id === selectedUser);
+    users.length > 0 && users.find((user) => user.id === selectedUser.id);
   return (
     selectedUserInfo && (
       <Grid item xs={12} sm={3} md={3} lg={3}>
