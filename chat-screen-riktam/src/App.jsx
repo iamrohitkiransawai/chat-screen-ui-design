@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container, CssBaseline, Grid } from "@mui/material";
 import "./App.css";
 import AnalysisInfo from "./components/analysisInfo";
@@ -7,9 +7,27 @@ import UserInfo from "./components/userInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { faker } from "@faker-js/faker";
 import { addSenderToStore } from "./slices/senderSlice";
+import { addUserToStore } from "./slices/usersSlice";
 
 const App = () => {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const dispatch = useDispatch();
+  const isInitialRender = useRef(true);
+
+  const addUsersData = () => {
+    for (let i = 0; i < 5; i++) {
+      let user = {
+        id: i + 1,
+        name: faker.name.fullName(),
+        avatar: faker.image.avatar(),
+        isActive: true,
+        isArchive: false,
+        unreadMessageCount: 0,
+      };
+
+      dispatch(addUserToStore(user));
+    }
+  };
 
   const addSenderData = () => {
     let senderName = "";
@@ -26,14 +44,17 @@ const App = () => {
         addSenderToStore({ senderName, designation, activeStatus, avatar })
       );
     } catch (error) {
-      console.log(":: ~ file: App.jsx:25 ~ useEffect ~ error", error);
       console.table({ senderName, designation, activeStatus, avatar });
     }
   };
 
   useEffect(() => {
-    addSenderData();
-  }, []);
+    if (!isDataLoaded) {
+      addSenderData();
+      addUsersData();
+      setIsDataLoaded((prevState) => !prevState);
+    }
+  }, [isDataLoaded]);
 
   return (
     <Container maxWidth="xl">

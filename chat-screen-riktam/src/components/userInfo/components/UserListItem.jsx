@@ -31,7 +31,7 @@ const UserListItem = ({ user }) => {
         }
       />
       <Dot dotColor={"#ff165d"} textColor={"#fff"}>
-        10
+        {user.unreadMessageCount}
       </Dot>
     </ListItemButton>
   );
