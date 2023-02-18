@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, CssBaseline, Grid } from "@mui/material";
 import "./App.css";
 import AnalysisInfo from "./components/analysisInfo";
 import ChatInfo from "./components/chatInfo";
 import UserInfo from "./components/userInfo";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { faker } from "@faker-js/faker";
 import { addSenderToStore } from "./slices/senderSlice";
 import { addUserToStore } from "./slices/usersSlice";
@@ -12,7 +12,6 @@ import { addUserToStore } from "./slices/usersSlice";
 const App = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const dispatch = useDispatch();
-  const isInitialRender = useRef(true);
 
   const addUsersData = () => {
     for (let i = 0; i < 5; i++) {
