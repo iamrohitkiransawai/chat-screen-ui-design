@@ -48,7 +48,7 @@ const CopyLinkComp = () => {
             senderActiveStatus={activeStatus}
             chats={messages}
             senderAvatar={avatar}
-            receiver={selectedUser}
+            receiverAvatar={selectedUser.avatar}
             saveMsgToStore={saveNewMessageToStore}
           />
         )}

@@ -18,7 +18,7 @@ const ChatWindow = ({
   senderActiveStatus,
   chats,
   senderAvatar,
-  receiver,
+  receiverAvatar,
   saveMsgToStore,
 }) => {
   const listRef = useRef(null);
@@ -56,7 +56,7 @@ const ChatWindow = ({
                 <div style={{ position: "relative" }}>
                   <ListItemAvatar>
                     <StyledAvatar
-                      src={receiver.avatar}
+                      src={receiverAvatar}
                       className={"receiverMessage"}
                     />
                     <StyledDot position="left" active={true} />
