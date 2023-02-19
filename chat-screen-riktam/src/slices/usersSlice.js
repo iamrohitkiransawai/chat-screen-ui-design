@@ -25,10 +25,19 @@ const usersSlice = createSlice({
     setSelectedUser: (state, { payload }) => {
       state.selectedUser = { ...payload };
     },
+    setUserArchiveStatus: (state) => {
+      state.selectedUser.isArchive = true;
+      for (let i = 0; i < state.users.length; i++) {
+        if (state.users[i].id === state.selectedUser.id) {
+          state.users[i].isArchive = !state.users[i].isArchive;
+        }
+      }
+    },
   },
 });
 
-export const { addUser, setSelectedUser } = usersSlice.actions;
+export const { addUser, setSelectedUser, setUserArchiveStatus } =
+  usersSlice.actions;
 
 export const usersDataSelector = (state) => state.usersData;
 
@@ -40,4 +49,17 @@ export const addUserToStore = (data) => async (dispatch) => {
 
 export const setSelectedUserState = (data) => async (dispatch) => {
   dispatch(setSelectedUser(data));
+};
+
+export const setArchiveUserConv = () => async (dispatch, getState) => {
+  await dispatch(setUserArchiveStatus());
+  dispatch(changeSelectedUserAfterArchive());
+};
+
+const changeSelectedUserAfterArchive = () => async (dispatch, getState) => {
+  const { users } = getState().usersData;
+  const activeUsers = users.filter(
+    (user) => user.isActive === true && user.isArchive === false
+  );
+  activeUsers.length > 0 && dispatch(setSelectedUser(activeUsers[0]));
 };
