@@ -1,14 +1,20 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSxForUserInfo } from "../../utils";
 import MiddleRightSection from "./components/MiddleRightSection";
 import CopyLinkComp from "./components/onboard-client/CopyLinkComp";
 import UserArchiveScreen from "./components/UserArchiveScreen";
-import { usersDataSelector } from "../../slices/usersSlice";
+import { setArchiveUserConv, usersDataSelector } from "../../slices/usersSlice";
 
 const AnalysisInfo = ({ userId }) => {
   const { users, selectedUser } = useSelector(usersDataSelector);
+  const dispatch = useDispatch();
+
+  const archiveUser = () => {
+    dispatch(setArchiveUserConv());
+  };
+
   const selectedUserInfo =
     users.length > 0 && users.find((user) => user.id === selectedUser.id);
   return (
@@ -18,6 +24,8 @@ const AnalysisInfo = ({ userId }) => {
           <UserArchiveScreen
             name={selectedUserInfo.name}
             emailId={selectedUserInfo.emailId}
+            archiveStatus={selectedUserInfo.isArchive}
+            archiveUser={archiveUser}
           />
         </Box>
         <MiddleRightSection />

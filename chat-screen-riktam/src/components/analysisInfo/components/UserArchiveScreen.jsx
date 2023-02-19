@@ -7,10 +7,10 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import { ArchiveBtn } from "../styles";
-import { ARCHIVE, FIRST, SECOND } from "../../../constants";
+import { ARCHIVE, FIRST, SECOND, UNARCHIVE } from "../../../constants";
 import { getFirstSecondLetterOfName } from "../../../utils";
 
-const UserArchiveScreen = ({ name, emailId }) => {
+const UserArchiveScreen = ({ name, emailId, archiveUser, archiveStatus }) => {
   return (
     <>
       <UserInfoBox>
@@ -22,8 +22,12 @@ const UserArchiveScreen = ({ name, emailId }) => {
       <InfoWithIcon info={emailId} Icon={EmailOutlinedIcon} />
       <InfoWithIcon info={name} Icon={AccountCircleOutlinedIcon} />
       <ArchiveBtn>
-        <Button variant="outlined" endIcon={<Inventory2OutlinedIcon />}>
-          {ARCHIVE}
+        <Button
+          onClick={archiveUser}
+          variant="outlined"
+          endIcon={<Inventory2OutlinedIcon />}
+        >
+          {!archiveStatus ? ARCHIVE : UNARCHIVE}
         </Button>
       </ArchiveBtn>
     </>

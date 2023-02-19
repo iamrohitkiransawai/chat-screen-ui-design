@@ -17,6 +17,20 @@ const UserInfo = () => {
 
   const { users } = useSelector(usersDataSelector);
 
+  const activeUserCount = users.filter(
+    (user) => user.isActive === true && user.isArchive === false
+  ).length;
+
+  const archiveUserCount = users.filter(
+    (user) => user.isArchive === true
+  ).length;
+
+  const archiveUsers = users.filter((user) => user.isArchive === true);
+
+  const activeUsers = users.filter(
+    (user) => user.isArchive === false && user.isActive === true
+  );
+
   const changeSenderActiveStatus = () => {
     dispatch(makeChangeInSenderStatus(!activeStatus));
   };
@@ -32,16 +46,16 @@ const UserInfo = () => {
       />
 
       <CollapsedList
-        users={users}
+        users={activeUsers}
         listName={"Active Conversations"}
-        totalUnreadCount={5}
+        totalUnreadCount={activeUserCount}
         defaultCollapseState={true}
       />
 
       <CollapsedList
-        users={getListOfUsers()}
+        users={archiveUsers}
         listName={"Archive Conversations"}
-        totalUnreadCount={10}
+        totalUnreadCount={archiveUserCount}
         defaultCollapseState={false}
       />
     </Grid>
