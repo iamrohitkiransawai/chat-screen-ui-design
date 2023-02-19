@@ -18,7 +18,8 @@ const ChatWindow = ({
   senderActiveStatus,
   chats,
   senderAvatar,
-  receiverAvatar,
+  receiver,
+  saveMsgToStore,
 }) => {
   const listRef = useRef(null);
 
@@ -26,56 +27,11 @@ const ChatWindow = ({
     listRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [listRef]);
 
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      type: RECEIVER,
-      text: "Hello, How are you?",
-      time: Date.now() + 1000,
-    },
-    {
-      id: 2,
-      type: SENDER,
-      text: "Hello, How are you?",
-      time: Date.now() + 2000,
-    },
-    {
-      id: 3,
-      type: RECEIVER,
-      text: "Hello, How are you?",
-      time: Date.now() + 3000,
-    },
-    {
-      id: 4,
-      type: SENDER,
-      text: "Hello, How are you?",
-      time: Date.now() + 4000,
-    },
-    {
-      id: 5,
-      type: RECEIVER,
-      text: "Hello, How are you?",
-      time: Date.now() + 5000,
-    },
-    {
-      id: 6,
-      type: SENDER,
-      text: "Hello, How are you?",
-      time: Date.now() + 6000,
-    },
-  ]);
   const [newMessage, setNewMessage] = useState("");
   const { height } = useWindowDimensions();
 
   const handleSendMessage = () => {
-    setMessages([
-      ...messages,
-      {
-        id: messages.length + 1,
-        type: SENDER,
-        text: newMessage,
-      },
-    ]);
+    saveMsgToStore(newMessage);
     setNewMessage("");
   };
 
@@ -100,7 +56,7 @@ const ChatWindow = ({
                 <div style={{ position: "relative" }}>
                   <ListItemAvatar>
                     <StyledAvatar
-                      src={receiverAvatar}
+                      src={receiver.avatar}
                       className={"receiverMessage"}
                     />
                     <StyledDot position="left" active={true} />
