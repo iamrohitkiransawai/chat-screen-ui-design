@@ -7,8 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import { Dot } from "../styles";
+import { useDispatch } from "react-redux";
+import { setSelectedUser } from "../../../slices/usersSlice";
 
 const UserListItem = ({ user }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(setSelectedUser(user));
+  };
+
   return (
     <ListItemButton
       sx={{
@@ -17,6 +24,7 @@ const UserListItem = ({ user }) => {
         padding: 1.3,
         backgroundColor: "#B5EAEA",
       }}
+      onClick={handleClick}
     >
       <ListItemAvatar>
         <Avatar alt={user.name} src={user.avatar} />
