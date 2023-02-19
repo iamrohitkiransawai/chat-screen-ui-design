@@ -1,12 +1,16 @@
 import { Grid, Box } from "@mui/material";
-import { useSelector } from "react-redux";
-import { conversationSelector } from "../../slices/conversationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addChatToStore,
+  conversationSelector,
+} from "../../slices/conversationSlice";
 import { senderDataSelector } from "../../slices/senderSlice";
 import { usersDataSelector } from "../../slices/usersSlice";
 import ChatWindow from "./components/ChatWindow";
 import useWindowDimensions from "./components/useWindowDimensions";
 
 const CopyLinkComp = () => {
+  const dispatch = useDispatch();
   const { activeStatus, avatar } = useSelector(senderDataSelector);
   const { selectedUser } = useSelector(usersDataSelector);
   const { chats } = useSelector(conversationSelector);
@@ -15,6 +19,17 @@ const CopyLinkComp = () => {
     chats.filter(
       (chat) => chat.to === selectedUser.id || chat.from === selectedUser.id
     );
+
+  const saveNewMessageToStore = async (newMessage) => {
+    let chatObj = {
+      id: chats.at(-1).id + 1,
+      fromId: 0,
+      toId: selectedUser.id,
+      message: newMessage,
+      time: Date.now(),
+    };
+    await dispatch(addChatToStore(chatObj));
+  };
 
   return (
     <Grid item xs={12} sm={6} md={6} lg={6}>
@@ -34,6 +49,7 @@ const CopyLinkComp = () => {
             chats={messages}
             senderAvatar={avatar}
             receiverAvatar={selectedUser.avatar}
+            saveMsgToStore={saveNewMessageToStore}
           />
         )}
       </Box>
